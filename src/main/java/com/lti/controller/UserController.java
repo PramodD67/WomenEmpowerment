@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.entity.Course;
+import com.lti.entity.FAQNGO;
 import com.lti.entity.NGO;
 import com.lti.entity.UserRegistration;
 import com.lti.exceptions.UserAlreadyExistsException;
 import com.lti.service.CourseService;
+import com.lti.service.FAQNGOService;
 import com.lti.service.NGOService;
 import com.lti.service.UserService;
 
@@ -30,6 +32,8 @@ public class UserController {
     private CourseService cService;
 	@Autowired
     private NGOService nService;
+	@Autowired
+    private FAQNGOService fService;
 
 
 	//User registration
@@ -72,7 +76,45 @@ public class UserController {
     	public List<NGO> getAllNGO(){
     		return nService.listOfNGO();
     	}
+        
+        
+        //NGO FAQ
+        @PostMapping("/ngofaq_addqtn")
+      	public FAQNGO addQuestion(@RequestBody FAQNGO q)  {
+     
+      			return fService.createQuestion(q);
+      	  
+  	
+      	
+      	}
+        
+        @PostMapping("/ngofaq_addans")
+       	public FAQNGO addAnswer(@RequestBody FAQNGO a)  {
+      
+       			return fService.createAnswer(a);
+       	  
+   	
+       	
+       	}
+        
+//        @PostMapping("/ngofaqusername")
+//       	public FAQNGO addNgoUser(@RequestBody FAQNGO u)  {
+//      
+//       			return fService.createNGOUsername(u);
+//       	  
+//   	
+//       	
+//       	}
+           
+          @GetMapping("/getngofaqqtns")
+      	public List<FAQNGO> getAllFAQNGOqtns(){
+      		return fService.listOfQtns();
+      	}
     
+          @GetMapping("/getngofaqans")
+        	public List<FAQNGO> getAllFAQNGOans(){
+        		return fService.listOfAns();
+        	}
 }
     
  

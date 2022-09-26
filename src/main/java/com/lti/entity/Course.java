@@ -8,6 +8,7 @@ import javax.persistence.*;
 public class Course {
 
 	@Id
+	
 	private int courseid;
 	private String coursename;
 	private String duaration;
